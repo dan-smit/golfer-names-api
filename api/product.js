@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors') //Allows code to run on server AND localstorage.
 const PORT = 8000
+const path = require('path')
 const router = express.Router();
 
 app.use(cors())
@@ -34,7 +35,7 @@ const golfers = {
 }
 
 router.get('/', (request, response)=>{
-    response.sendFile(__dirname + '../index.html') //index.html
+    response.sendFile(path.join(__dirname, '..', '/index.html')) //index.html
 })
 
 router.get('/api/:golferName', (request, response)=>{
@@ -45,9 +46,5 @@ router.get('/api/:golferName', (request, response)=>{
         response.json(golfers['dan smith'])
     }
 }) 
-
-// app.listen(process.env.PORT || PORT, ()=>{   //process.env.PORT is the server on Heroku
-//     console.log(`The server is running on port ${PORT}! You better go catch it!`)
-// })
 
 module.exports = router;
